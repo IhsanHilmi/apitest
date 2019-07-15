@@ -9,7 +9,7 @@ const Hash = use('Hash')
 class User extends Model {
   
   stuff(){
-    return this.hasMany('App/Models/Stuff')
+    return this.hasMany('App/Models/Stuff','id','id_belonging')
   }
 
   static boot () {

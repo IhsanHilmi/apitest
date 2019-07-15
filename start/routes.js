@@ -21,24 +21,23 @@ Route.get('/', () => {
 })
 
 Route.group(() => {
-  Route.get('new', 'UserController.store')
-  Route.put('edit/:id', 'UserController.update')
-  Route.delete('delete/:id', 'UserController.delete')
-  Route.post('list','UserController.index')
-  Route.post(':id','UserController.show')
-  
-  Route.group(() => {
-    Route.get('new', 'StuffController.store')
-    Route.post('list','StuffController.index')
-    Route.post(':sid','StuffController.show')
-  }).prefix(':id/stuff/')
+  Route.post('new', 'UserController.store')
+  Route.put(':id/edit', 'UserController.update')
+  Route.delete(':id/delete', 'UserController.delete')
+  Route.get('list','UserController.index')
+  Route.get(':id','UserController.show')
 
 }).prefix('user/')
 
+Route.group(() => {
+  Route.post('new', 'StuffController.store')
+  Route.get('list','StuffController.index')
+  Route.get(':sid','StuffController.show')
+  Route.put(':sid/edit', 'StuffController.update')
+  Route.delete(':sid/delete', 'StuffController.delete')
+}).prefix('user/:id/stuff/')
 
 Route.group(() => {
-  Route.put('edit/:sid', 'StuffController.update')
-  Route.delete('delete/:sid', 'StuffController.delete')
-  Route.post('list','StuffController.index')
-  Route.post(':sid','StuffController.show')
+  Route.get('list','StuffController.index')
+  Route.get(':sid','StuffController.show')
 }).prefix('stuff/')
