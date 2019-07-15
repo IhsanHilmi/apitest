@@ -3,12 +3,20 @@
 const stuff = use('App/Models/Stuff')
 
 class StuffController {
-    async index({response}){
+    async index({response,params}){
+        if(!params.id){
         const allstuff = await stuff
         .query()
         .with('user')
         .fetch()
-
+        }
+        else{
+        const allstuff = await stuff
+        .query()
+        .with('user')
+        .where('id_belonging',params.id)
+        .fetch()
+        }
         response.json({
             greeting : "Here's the stuff",
             data : allstuff,
@@ -59,12 +67,23 @@ class StuffController {
         })
     }
     async show({params,response}){
-       const stuff1 = await stuff
-       .query()
-       .with('user')
-       .where('id',params.sid)
-       .fetch()
-        
+       
+        if(!params.id){
+            const allstuff = await stuff
+            .query()
+            .with('user')
+            .where('id',params.sid)
+            .fetch()
+        }
+        else{
+            const allstuff = await stuff
+            .query()
+            .with('user')
+            .where('id',params.sid)
+            .where('id_belonging',params.id)
+            .fetch()
+        }
+
         response.json({
             greeting : "Here's the "+stuff1.name+" stuff data",
             data : stuff1
