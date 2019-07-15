@@ -22,6 +22,7 @@ or manually clone the repo and then run `npm install`.
 ### Migrations & Seeding
 
 Run the following command to run startup migrations.
+PS. the database name is apites and the tables are 'users'and 'stuffs'
 
 ```js
 adonis migration:run
